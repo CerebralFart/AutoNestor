@@ -16,9 +16,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read string $label
  */
 class Week extends Model {
+    private static $_current = null;
+
     public static function current(): Week {
-        //TODO kunnen we dit cachen?
-        return self::byDate(Carbon::now());
+        if (self::$_current === null) {
+            self::$_current = self::byDate(Carbon::now());
+        }
+        return self::$_current;
     }
 
     public static function byDate(Carbon $moment): Week {
