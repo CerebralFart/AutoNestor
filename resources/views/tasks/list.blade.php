@@ -4,18 +4,18 @@
 
 {{--TODO add policy checks to links--}}
 
-@section('content')
+@section('buttons')
     @can('create', \App\Models\Task::class)
-        <div class="flex flex-row justify-end">
-            <x-button
-                href="{{route('tasks.create')}}"
-                icon="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            >
-                Nieuw
-            </x-button>
-        </div>
+        <x-button
+            href="{{route('tasks.create')}}"
+            icon="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        >
+            Nieuw
+        </x-button>
     @endif
+@endsection
 
+@section('content')
     @if(count($items) === 0)
         <i>Geen taken gevonden, maak er snel een aan!</i>
     @else

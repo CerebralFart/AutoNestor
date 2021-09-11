@@ -5,4 +5,4 @@
   - [ ] Taken die door iedereen gevetoed zijn
 - [ ] Vakanties toevoegen
 - [ ] Schoonmaakboetes
-- [ ] Titel en knoppen naar 1 regel colapsen
+- [ ] Responsive design

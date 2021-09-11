@@ -4,18 +4,18 @@
 
 {{--TODO add policy checks to links--}}
 
-@section('content')
+@section('buttons')
     @can('create', \App\Models\User::class)
-        <div class="flex flex-row justify-end">
-            <x-button
-                href="{{route('users.create')}}"
-                icon="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            >
-                Nieuw
-            </x-button>
-        </div>
+        <x-button
+            href="{{route('users.create')}}"
+            icon="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        >
+            Nieuw
+        </x-button>
     @endif
+@endsection
 
+@section('content')
     <div class="bg-white shadow overflow-hidden sm:rounded-md mt-4">
         <ul role="list" class="divide-y divide-gray-200">
             @foreach($items as $item)
