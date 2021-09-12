@@ -11,7 +11,7 @@
             Bewerken
         </x-button>
     @endif
-    @can('delete',$item)
+    @can('delete', $item)
         <form method="POST" action="{{route('users.delete', ['id' => $item->id])}}" class="m-0">
             @csrf
             <x-button
