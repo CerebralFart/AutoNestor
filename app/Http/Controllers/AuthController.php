@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class AuthController extends Controller {
     public function login(Request $request) {
         if ($request->method() === 'POST') {
-            $success = auth()->attempt($request->only(['email', 'password']));
+            $success = auth()->attempt(
+                $request->only(['email', 'password']),
+                $request->boolean('remember')
+            );
             if ($success) {
                 return redirect()->route('dashboard');
             } else {
