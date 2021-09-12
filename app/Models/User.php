@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
  * @property-read Collection|Assignment[] $assignments
  * @property string $name
  * @property string $email
+ * @property string $role
  */
 class User extends Authenticatable {
     use SoftDeletes;
@@ -25,6 +27,7 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -48,6 +51,14 @@ class User extends Authenticatable {
 
     public function setPasswordAttribute(?string $value) {
         $this->attributes['password'] = $value ? Hash::make($value) : null;
+    }
+
+    public function setRoleAttribute(string $value) {
+        if (in_array($value, ['user', 'admin'])) {
+            $this->attributes['role'] = $value;
+        } else {
+            throw new Exception(sprintf("Role [%s] is invalid, must be one of (user, admin)", $value));
+        }
     }
 
     public function assignmentForWeek(Week $week): ?Assignment {

@@ -37,7 +37,10 @@ class AuthController extends Controller {
         if (User::query()->exists()) {
             return redirect()->route('login');
         } else if ($request->method() === 'POST') {
-            User::create($request->only(['name', 'email', 'password']));
+            User::create(array_merge(
+                $request->only(['name', 'email', 'password']),
+                ['role' => 'admin']
+            ));
             return redirect()->route('login');
         } else {
             return view('auth.initialize');

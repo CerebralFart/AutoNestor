@@ -31,6 +31,13 @@
         <dd class="col-span-3">{{$item->name}}</dd>
         <dt class="font-bold">E-mailadres:</dt>
         <dd class="col-span-3">{{$item->email}}</dd>
+        <dt class="font-bold">Rol:</dt>
+        <dd class="col-span-3">
+            @switch($item->role)
+                @case('user')Gebruiker @break
+                @case('admin')Admin @break
+            @endswitch
+        </dd>
         <dt class="font-bold">Authenticatie:</dt>
         <dd class="col-span-3">
             @if($item->password)
