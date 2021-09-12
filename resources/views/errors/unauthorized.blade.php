@@ -1,6 +1,7 @@
-<h1>You are not allowed to view this page</h1>
-@if(isset($message))
-    <h3>{{$message}}</h3>
-@endif
+@extends('layout.base')
 
-{{--TODO extend template--}}
+@section('title', 'Niet geauthoriseerd')
+
+@section('content')
+    Je mag deze pagina niet bekijken.
+@endsection

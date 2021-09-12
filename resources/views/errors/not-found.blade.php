@@ -1,2 +1,7 @@
-<h1>The requested resource does not exist</h1>
-{{--TODO extend template--}}
+@extends('layout.base')
+
+@section('title', 'Niet gevonden')
+
+@section('content')
+    Het object dat je zoekt, bestaat niet.
+@endsection
