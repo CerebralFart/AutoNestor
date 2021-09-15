@@ -90,8 +90,6 @@ abstract class CRUDController extends Controller {
                 'message' => $response->message(),
             ]);
         } else if ($request->method() === 'POST') {
-            /** @var Model $instance */
-            $instance = new ($this->getModel());
             $instance->fill($request->only($instance->fillable));
             $instance->save();
             return redirect()->route($this->getView());
