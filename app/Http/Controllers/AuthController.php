@@ -41,7 +41,8 @@ class AuthController extends Controller {
                 $request->only(['name', 'email', 'password']),
                 ['role' => 'admin']
             ));
-            return redirect()->route('login');
+            auth()->attempt($request->only(['email', 'password']));
+            return redirect()->route('dashboard');
         } else {
             return view('auth.initialize');
         }
