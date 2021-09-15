@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5cc32713085f61b0ec6935981507b018",
+    "content-hash": "3224485114d2b2d45ed25cf2cce0d069",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -960,16 +960,16 @@
         },
         {
             "name": "kick-in/hungarian",
-            "version": "dev-solve-max",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kick-In/hungarian.git",
-                "reference": "87d89972f4d6f104825bb2543917089d8abf6a5f"
+                "reference": "aa604ce3eddedf4b495cadfb22abff152dc88085"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kick-In/hungarian/zipball/87d89972f4d6f104825bb2543917089d8abf6a5f",
-                "reference": "87d89972f4d6f104825bb2543917089d8abf6a5f",
+                "url": "https://api.github.com/repos/Kick-In/hungarian/zipball/aa604ce3eddedf4b495cadfb22abff152dc88085",
+                "reference": "aa604ce3eddedf4b495cadfb22abff152dc88085",
                 "shasum": ""
             },
             "require": {
@@ -996,9 +996,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Kick-In/hungarian/issues",
-                "source": "https://github.com/Kick-In/hungarian/tree/solve-max"
+                "source": "https://github.com/Kick-In/hungarian/tree/0.3.0"
             },
-            "time": "2021-09-11T20:16:13+00:00"
+            "time": "2021-09-15T09:10:20+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8303,14 +8303,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "kick-in/hungarian": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
