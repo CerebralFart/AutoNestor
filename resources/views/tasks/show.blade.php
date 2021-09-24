@@ -34,12 +34,12 @@
     </dl>
 
     <h3 class="mt-8 text-xl font-semibold">Veto's</h3>
-    @if($item->vetos->isEmpty())
+    @if($item->vetoers->isEmpty())
         <i>{{$item->name ?? 'Taak'}} heeft geen veto's.</i>
     @else
         <ul class="list-disc list-inside">
-            @foreach($item->vetos as $veto)
-                <li>{{$veto->user->name}}</li>
+            @foreach($item->vetoers as $veto)
+                <li>{{$veto->name}}</li>
             @endforeach
         </ul>
     @endif

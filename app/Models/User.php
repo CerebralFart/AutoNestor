@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 /**
  * @property-read int $id
  * @property-read Collection|Assignment[] $assignments
+ * @property-read Collection|Task[] $vetos
  * @property string $name
  * @property string $email
  * @property string $role
@@ -70,6 +71,6 @@ class User extends Authenticatable {
     }
 
     public function vetos() {
-        return $this->hasMany(Veto::class);
+        return $this->belongsToMany(Task::class, 'vetos');
     }
 }

@@ -54,7 +54,7 @@
     @else
         <ul class="list-disc list-inside">
             @foreach($item->vetos as $veto)
-                <li>{{$veto->task->name}}</li>
+                <li>{{$veto->name}}</li>
             @endforeach
         </ul>
     @endif

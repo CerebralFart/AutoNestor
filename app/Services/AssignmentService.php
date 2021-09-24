@@ -29,8 +29,7 @@ class AssignmentService {
         $builder->setColSource(Task::all()->all());
         $builder->setRowSource(User::all()->all());
         $builder->setMappingFunction(function (User $user, Task $task) use ($week) {
-            if (Veto::query()->where([
-                'user_id' => $user->id,
+            if ($user->vetos()->where([
                 'task_id' => $task->id,
             ])->exists()) return 0;
 
@@ -49,7 +48,6 @@ class AssignmentService {
         });
 
         $matrix = $builder->build();
-        var_dump($matrix);
         $matrix->shuffle();
         return $this->hungarian->solveMax($matrix)->withoutUnassigned();
     }
