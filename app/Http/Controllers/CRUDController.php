@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 abstract class CRUDController extends Controller {
     protected $model = null;
@@ -28,6 +30,25 @@ abstract class CRUDController extends Controller {
         } else {
             return sprintf("%s.%s", $this->views, $name);
         }
+    }
+
+    private function updateModel(Model $model, Request $request) {
+        $data = $request->input();
+        foreach ($data as $key => $value) {
+            if ($model->isRelation($key)) {
+                $relation = $model->{$key}();
+                if (method_exists($relation, 'sync')) {
+                    $relation->sync($value === null ? [] : $value);
+                } else {
+                    $relation->associate($value);
+                }
+            } elseif ($model->isFillable($key)) {
+                $model->{$key} = $value;
+            } elseif (!Str::startsWith($key, '_')) {
+                throw new Exception("Parameter ${key} could not be persisted");
+            }
+        }
+        $model->save();
     }
 
     public function list(Request $request) {
@@ -69,8 +90,7 @@ abstract class CRUDController extends Controller {
         } else if ($request->method() === 'POST') {
             /** @var Model $instance */
             $instance = new ($this->getModel());
-            $instance->fill($request->only($instance->fillable));
-            $instance->save();
+            $this->updateModel($instance, $request);
             return redirect()->route($this->getView());
         } else {
             return view($this->getView('create'));
@@ -90,8 +110,7 @@ abstract class CRUDController extends Controller {
                 'message' => $response->message(),
             ]);
         } else if ($request->method() === 'POST') {
-            $instance->fill($request->only($instance->fillable));
-            $instance->save();
+            $this->updateModel($instance, $request);
             return redirect()->route($this->getView());
         } else {
             return view($this->getView('update'), ['item' => $instance]);
