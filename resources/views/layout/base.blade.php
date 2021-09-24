@@ -3,7 +3,7 @@
 @section('body')
     @include('layout.menu')
     <div class="bg-gray-100 ml-60 min-h-screen">
-        <main class="flex-1 relative overflow-y-auto focus:outline-none">
+        <main class="flex-1 relative min-h-screen overflow-y-auto focus:outline-none">
             <div class="py-6">
                 @hasSection('title')
                     <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 mb-6 flex flex-row gap-2 items-center">
