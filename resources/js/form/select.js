@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
         button.addEventListener('click', () => list.classList.toggle("hidden"));
         items.forEach(item => item.addEventListener("click", () => {
             value.value = item.dataset.value;
-            text.innerText = item.dataset.value;
+            text.innerText = item.querySelector("div:first-child").innerText;
             items.forEach(innerItem => {
                 innerItem.querySelector("div:first-child").classList.toggle("font-semibold", innerItem === item)
                 innerItem.querySelector("div:last-child").classList.toggle("hidden", innerItem !== item);
