@@ -23,6 +23,12 @@
             value="user"
             :options="['admin' => 'Administrator', 'user' => 'Gebruiker']"
         />
+        <x-form.multi-select
+            id="vetos"
+            name="Veto's"
+            :values="[]"
+            :options="collect(\App\Models\Task::all())->pluck('name','id')->all()"
+        />
         @csrf
         <div class="flex flex-row justify-end">
                 <x-button type="submit" color="green">
