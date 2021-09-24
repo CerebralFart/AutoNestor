@@ -1,21 +1,24 @@
-// TODO add animations when opening / closing
-window.addEventListener('load', () => {
-    document.querySelectorAll("[data-input-type='select']").forEach(select => {
-        const button = select.querySelector("[role='button']")
-        const text = button.querySelector("div:first-child");
-        const value = select.querySelector('input');
-        const list = select.querySelector("ul");
-        const items = select.querySelectorAll("li");
+import Alpine from "alpinejs";
 
-        button.addEventListener('click', () => list.classList.toggle("hidden"));
-        items.forEach(item => item.addEventListener("click", () => {
-            value.value = item.dataset.value;
-            text.innerText = item.querySelector("div:first-child").innerText;
-            items.forEach(innerItem => {
-                innerItem.querySelector("div:first-child").classList.toggle("font-semibold", innerItem === item)
-                innerItem.querySelector("div:last-child").classList.toggle("hidden", innerItem !== item);
-            })
-            list.classList.add("hidden");
-        }))
-    })
-})
+Alpine.data('select', () => ({
+    names: null,
+    open: false,
+    options: null,
+    value: null,
+
+    init() {
+        let {options, value} = this.$root.dataset;
+        this.names = JSON.parse(options);
+        this.options = Object.keys(this.names);
+        this.value = value;
+    },
+
+    toggle() {
+        this.open = !this.open;
+    },
+
+    select(value) {
+        this.value = value;
+        this.open = false;
+    }
+}));
