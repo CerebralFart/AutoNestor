@@ -17,6 +17,12 @@
             type="password"
             name="Wachtwoord"
         />
+        <x-form.select
+            id="role"
+            name="Rol"
+            value="user"
+            :options="['admin' => 'Administrator', 'user' => 'Gebruiker']"
+        />
         @csrf
         <div class="flex flex-row justify-end">
                 <x-button type="submit" color="green">

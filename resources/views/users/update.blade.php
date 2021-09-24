@@ -33,7 +33,7 @@
             id="role"
             name="Rol"
             :value="$item->role"
-            :options="['admin', 'user']"
+            :options="['admin' => 'Administrator', 'user' => 'Gebruiker']"
         />
         @csrf
         <div class="flex flex-row justify-end">
