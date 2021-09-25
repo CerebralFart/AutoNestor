@@ -1,13 +1,13 @@
 {{-- TODO field cannot be focussed using the tab key --}}
 {{-- TODO this only works with associative arrays currently --}}
-<div>
+<div class="flex flex-col gap-2 lg:flex-row lg:items-center">
     <x-form.label
         :id="$attributes->get('id')"
         :name="$attributes->get('name')"
     />
 
     <div
-        class="mt-1 relative"
+        class="relative flex-grow"
         x-data="multiselect"
         data-options="{{json_encode($attributes->get('options', []))}}"
         data-values="{{json_encode($attributes->get('values', []))}}"

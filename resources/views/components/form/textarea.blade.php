@@ -1,11 +1,11 @@
-<div>
+<div class="flex flex-col gap-2 lg:flex-row lg:items-center">
     @if($attributes->has('name'))
         <x-form.label
             id="{{$attributes->get('id')}}"
             name="{{$attributes->get('name')}}"
         />
     @endif
-    <div class="mt-1">
+    <div class="flex-grow">
         <textarea
             id="{{$attributes->get('id')}}"
             name="{{$attributes->get('id')}}"

@@ -7,13 +7,13 @@
     }
 @endphp
 
-<div>
+<div class="flex flex-col gap-2 lg:flex-row lg:items-center">
     <x-form.label
         :id="$attributes->get('id')"
         :name="$attributes->get('name')"
     />
     <div
-        class="mt-1 relative"
+        class="relative flex-grow"
         x-data="select"
         data-nullable="{{$attributes->has('nullable')}}"
         data-options="{{json_encode($attributes->get('options', []))}}"
