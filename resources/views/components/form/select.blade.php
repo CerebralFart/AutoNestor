@@ -15,6 +15,7 @@
     <div
         class="relative flex-grow"
         x-data="select"
+        @click.outside="open = false"
         data-nullable="{{$attributes->has('nullable')}}"
         data-options="{{json_encode($attributes->get('options', []))}}"
         data-value="{{$attributes->get('value', null)}}"

@@ -9,6 +9,7 @@
     <div
         class="relative flex-grow"
         x-data="multiselect"
+        @click.outside="open = false"
         data-options="{{json_encode($attributes->get('options', []))}}"
         data-values="{{json_encode($attributes->get('values', []))}}"
     >
