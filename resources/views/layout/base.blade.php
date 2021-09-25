@@ -2,7 +2,7 @@
 
 @section('body')
     @include('layout.menu')
-    <div class="bg-gray-100 ml-60 min-h-screen">
+    <div class="bg-gray-100 ml-14 min-h-screen md:ml-60">
         <main class="flex-1 relative min-h-screen overflow-y-auto focus:outline-none">
             <div class="py-6">
                 @hasSection('title')
