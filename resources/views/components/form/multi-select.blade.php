@@ -50,26 +50,19 @@
             </div>
         </div>
 
-        <!--
-          Select popover, show/hide based on select state.
-
-          Entering: ""
-            From: ""
-            To: ""
-          Leaving: "transition ease-in duration-100"
-            From: "opacity-100"
-            To: "opacity-0"
-        -->
         <ul
             x-show="open"
             class="absolute z-10 mt-1 w-full select-none bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
         >
             <template x-for="key in options">
                 <li class="group text-gray-900 cursor-default select-none relative py-2 pl-8 pr-4 cursor-pointer hover:bg-blue-600" @click="()=>toggleOption(key)">
                     <div
                         x-text="names[key]"
                         class="block truncate group-hover:text-white"
-                        :class="selected.indexOf(key)>-1&&'font-bold'"
+                        :class="selected.indexOf(key) > -1 && 'font-bold'"
                     ></div>
 
                     <div

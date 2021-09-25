@@ -31,15 +31,9 @@
         >
             <div
                 class="block truncate h-5"
-                x-show="value !== null"
-                x-text="names[value]"
+                :class="value === null && 'italic'"
+                x-text="names[value] ?? 'Niets geselecteerd'"
             ></div>
-            <div
-                class="block truncate h-5 italic"
-                x-show="value === null"
-            >
-                Niets geselecteerd
-            </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -47,19 +41,12 @@
             </div>
         </div>
 
-        <!--
-          Select popover, show/hide based on select state.
-
-          Entering: ""
-            From: ""
-            To: ""
-          Leaving: "transition ease-in duration-100"
-            From: "opacity-100"
-            To: "opacity-0"
-        -->
         <ul
             x-show="open"
             class="absolute z-10 mt-1 w-full select-none bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
         >
             <template x-for="key in options">
                 <li
