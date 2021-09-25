@@ -15,6 +15,7 @@
     <div
         class="mt-1 relative"
         x-data="select"
+        data-nullable="{{$attributes->has('nullable')}}"
         data-options="{{json_encode($attributes->get('options', []))}}"
         data-value="{{$attributes->get('value', null)}}"
     >
