@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-2 lg:flex-row lg:items-center">
+<div class="flex flex-col gap-2 lg:flex-row">
     @if($attributes->has('name'))
         <x-form.label
             id="{{$attributes->get('id')}}"
