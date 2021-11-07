@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Ordered;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $description
  */
 class Task extends Model {
+    use Ordered;
+
+    public static $orderBy = 'name';
+    
     protected $fillable = [
         'name',
         'description'

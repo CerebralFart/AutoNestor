@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Ordered;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
  * @property string $role
  */
 class User extends Authenticatable {
+    use Ordered;
     use SoftDeletes;
 
     /**
