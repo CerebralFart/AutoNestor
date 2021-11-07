@@ -7,7 +7,7 @@
     }
 @endphp
 
-<div class="flex flex-col gap-2 lg:flex-row">
+<div class="flex flex-col gap-2">
     <x-form.label
         :id="$attributes->get('id')"
         :name="$attributes->get('name')"
