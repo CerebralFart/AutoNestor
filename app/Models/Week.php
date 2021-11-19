@@ -38,7 +38,7 @@ class Week extends Model {
     public function weeksUntil(Week $week): int {
         $diff = $this->end->diff($week->end);
         $weeks = (int)ceil($diff->days / 7);
-        return $weeks * $diff->invert === 1 ? -1 : 1;
+        return $weeks * ($diff->invert === 1 ? -1 : 1);
     }
 
     public function getStartAttribute() {
