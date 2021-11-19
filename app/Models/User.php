@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * @property-read int $id
+ * @property int $order
  * @property-read Collection|Assignment[] $assignments
  * @property-read Collection|Task[] $vetos
  * @property string $name
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable {
     use Ordered;
     use SoftDeletes;
+    public static $orderBy = 'order';
 
     /**
      * The attributes that are mass assignable.
