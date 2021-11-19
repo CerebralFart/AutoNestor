@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends CRUDController {
@@ -31,6 +32,31 @@ class UserController extends CRUDController {
             $instance->save();
             $instance->delete();
             return redirect()->route('users');
+        }
+    }
+
+    public function order(Request $request) {
+        $response = Gate::authorize('order', User::class);
+        if ($response->denied()) {
+            return view('errors.unauthorized', [
+                'message' => $response->message(),
+            ]);
+        }
+
+        if ($request->isMethod('POST')) {
+            $items = $request->get('users');
+            DB::transaction(function () use ($items) {
+                foreach ($items as $order => $id) {
+                    $user = User::findOrFail($id);
+                    $user->order = $order;
+                    $user->save();
+                }
+            });
+            return redirect()->route('users');
+        } else {
+            return view('users.order', [
+                'items' => User::all()
+            ]);
         }
     }
 }

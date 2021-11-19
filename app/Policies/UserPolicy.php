@@ -41,4 +41,8 @@ class UserPolicy implements Policy {
         ) return Response::deny("Cannot remove last admin");
         return Response::allow();
     }
+
+    public function order(?User $user): Response {
+        return $this->update($user, null);
+    }
 }
