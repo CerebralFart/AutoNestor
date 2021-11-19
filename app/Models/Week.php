@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read Collection|Assignment[] $assignments
  * @property-read Carbon $start
  * @property-read Carbon $end
+ * @property-read Carbon $isoWeek
  * @property-read Week $next
  * @property-read Week $previous
  * @property-read string $label
@@ -41,20 +42,19 @@ class Week extends Model {
         return $weeks * ($diff->invert === 1 ? -1 : 1);
     }
 
-    public function getStartAttribute() {
+    public function getIsoWeekAttribute() {
         [$year, $week] = explode('-', $this->id);
         return (new Carbon)
             ->isoWeekYear($year)
-            ->isoWeek($week)
-            ->startOfWeek();
+            ->isoWeek($week);
+    }
+
+    public function getStartAttribute() {
+        return $this->isoWeek->startOfWeek();
     }
 
     public function getEndAttribute() {
-        [$year, $week] = explode('-', $this->id);
-        return (new Carbon)
-            ->isoWeekYear($year)
-            ->isoWeek($week)
-            ->endOfWeek();
+        return $this->isoWeek->endOfWeek();
     }
 
     public function getNextAttribute() {
