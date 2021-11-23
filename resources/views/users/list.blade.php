@@ -5,22 +5,36 @@
 {{--TODO add policy checks to links--}}
 
 @section('buttons')
-    @can('create', \App\Models\User::class)
-        <x-button
-            href="{{route('users.create')}}"
-            icon="M12 6v6m0 0v6m0-6h6m-6 0H6"
-        >
-            Nieuw
-        </x-button>
-    @endif
-    @can('order', \App\Models\User::class)
-        <x-button
-            href="{{route('users.order')}}"
-            icon="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-        >
-            Orderen
-        </x-button>
-    @endif
+    <div class="relative" x-data="{open: false}">
+        <x-button.group>
+            @can('create', \App\Models\User::class)
+                <x-button
+                    context="group" {{-- TODO can we do this implicitly? --}}
+                href="{{route('users.create')}}"
+                    icon="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                >
+                    Nieuw
+                </x-button>
+            @endif
+            @can('order',\App\Models\User::class)
+                <x-button context="group" icon="M19 9l-7 7-7-7" class="items-center" @click="open = !open" @click.outside="open = false">
+                </x-button>
+            @endif
+        </x-button.group>
+        @can('order',\App\Models\User::class)
+            <div x-bind:class="open ? '' : 'hidden'" class="absolute top-9 right-0 min-w-full py-1 rounded-b-md border border-gray-300 border-t-0 bg-white shadow-sm">
+                <button
+                    class="inline-flex items-center w-full pl-3 pr-2 py-1 transition-colors hover:bg-gray-200"
+                    onclick="window.location.href = '{{route('users.order')}}'"
+                >
+                    <span class="flex-grow text-left">Orderen</span>
+                    <svg class="text-gray-700 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </button>
+            </div>
+        @endif
+    </div>
 @endsection
 
 @section('content')
