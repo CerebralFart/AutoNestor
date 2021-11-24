@@ -12,8 +12,6 @@
     ];
 @endphp
 
-@aware([])
-
 <button
     type="{{$attributes->get('type', 'button')}}"
 
