@@ -29,6 +29,11 @@
             name="Omschrijving"
             :value="$item->description"
         />
+        <x-form.toggle
+            id="is_supervision"
+            name="Toezichttaak"
+            :value="$item->is_supervision"
+        />
         <x-form.multi-select
             id="vetoers"
             name="Veto's"

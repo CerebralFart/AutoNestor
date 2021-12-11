@@ -12,6 +12,10 @@
             id="description"
             name="Omschrijving"
         />
+        <x-form.toggle
+            id="is_supervision"
+            name="Toezichttaak"
+        />
         <x-form.multi-select
             id="vetoers"
             name="Veto's"
