@@ -43,7 +43,18 @@ abstract class CRUDController extends Controller {
                     $relation->associate($value);
                 }
             } elseif ($model->isFillable($key)) {
-                $model->{$key} = $value;
+                if (array_key_exists($key, $model->getCasts())) {
+                    switch ($model->getCasts()[$key]) {
+                        case 'boolean':
+                            $model->{$key} = $request->boolean($key);
+                            break;
+                        default:
+                            $model->{$key} = $value;
+                            break;
+                    }
+                } else {
+                    $model->{$key} = $value;
+                }
             } elseif (!Str::startsWith($key, '_')) {
                 throw new Exception("Parameter ${key} could not be persisted");
             }
