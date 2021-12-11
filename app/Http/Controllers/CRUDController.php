@@ -93,7 +93,7 @@ abstract class CRUDController extends Controller {
             $this->updateModel($instance, $request);
             return redirect()->route($this->getView());
         } else {
-            return view($this->getView('create'));
+            return view($this->getView('create'), ['item' => new ($this->getModel())]);
         }
     }
 
