@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read Collection|User[] $vetoers
  * @property string $name
  * @property string|null $description
+ * @property boolean $is_supervision
  */
 class Task extends Model {
     use Ordered;
@@ -20,7 +21,11 @@ class Task extends Model {
     
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'is_supervision'
+    ];
+    protected $casts = [
+        'is_supervision' => 'boolean'
     ];
 
     public function assignments() {
