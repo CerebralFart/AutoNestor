@@ -29,6 +29,10 @@
     <dl class="grid grid-cols-4 space-y-1">
         <dt class="font-bold">Taak:</dt>
         <dd class="col-span-3">{{$item->name}}</dd>
+        @if($item->is_supervision)
+            <dt></dt>
+            <dd class="col-span-3 italic text-sm">Toezichttaak</dd>
+        @endif
         <dt class="font-bold">Omschrijving:</dt>
         <dd class="col-span-3">{{$item->description}}</dd>
     </dl>
