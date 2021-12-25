@@ -10,6 +10,8 @@ use App\Services\AssignmentService;
 class CreateAssignmentsJob {
     public function __invoke() {
         $week = Week::current()->next;
+        if ($week->is_holiday) return;
+
         $service = new AssignmentService();
         $result = $service->generateForWeek($week);
         if ($result === null) return;

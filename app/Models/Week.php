@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read Week $next
  * @property-read Week $previous
  * @property-read string $label
+ * @property boolean is_holiday
  */
 class Week extends Model {
     private static $_current = null;
