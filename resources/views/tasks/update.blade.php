@@ -1,10 +1,11 @@
 @extends('layout.base')
 
-@section('title', 'Taak \'' . $item->name . '\' bewerken')
+@section('title', 'Taak \'' . $task->name . '\' bewerken')
 
 @section('buttons')
-    @can('delete', $item)
-        <form method="POST" action="{{route('tasks.delete', ['id' => $item->id])}}" class="m-0">
+    @can('delete', $task)
+        <form method="POST" action="{{route('tasks.destroy', ['task' => $task])}}" class="m-0">
+            @method('DELETE')
             @csrf
             <x-button
                 color="red"
@@ -18,21 +19,22 @@
 @endsection
 
 @section('content')
-    <form class="flex flex-col gap-2 mt-4" method="POST">
+    <form class="flex flex-col gap-2 mt-4" method="POST" action="{{route('tasks.update', ['task' => $task])}}">
+        @method('PUT')
         <x-form.text
             id="name"
             name="Naam"
-            :value="$item->name"
+            :value="$task->name"
         />
         <x-form.textarea
             id="description"
             name="Omschrijving"
-            :value="$item->description"
+            :value="$task->description"
         />
         <x-form.multi-select
             id="vetoers"
             name="Veto's"
-            :values="$item->vetoers->pluck('id')->all()"
+            :values="$task->vetoers->pluck('id')->all()"
             :options="collect(\App\Models\User::all())->pluck('name','id')->all()"
         />
         @csrf

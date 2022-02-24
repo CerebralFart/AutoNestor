@@ -3,7 +3,7 @@
 @section('title', 'Gebruiker aanmaken')
 
 @section('content')
-    <form class="flex flex-col gap-2 mt-4" method="POST">
+    <form class="flex flex-col gap-2 mt-4" action="{{route('users.store')}}" method="POST">
         <x-form.text
             id="name"
             name="Naam"

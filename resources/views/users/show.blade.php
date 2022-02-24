@@ -1,18 +1,19 @@
 @extends('layout.base')
 
-@section('title', 'Gebruiker \'' . $item->name . '\'')
+@section('title', 'Gebruiker \'' . $user->name . '\'')
 
 @section('buttons')
-    @can('update', $item)
+    @can('update', $user)
         <x-button
-            href="{{route('users.update', ['id' => $item->id])}}"
+            href="{{route('users.edit', ['user' => $user->id])}}"
             icon="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
         >
             Bewerken
         </x-button>
     @endif
-    @can('delete', $item)
-        <form method="POST" action="{{route('users.delete', ['id' => $item->id])}}" class="m-0">
+    @can('delete', $user)
+        <form method="POST" action="{{route('users.destroy', ['user' => $user->id])}}" class="m-0">
+            @method('DELETE')
             @csrf
             <x-button
                 color="red"
@@ -28,32 +29,32 @@
 @section('content')
     <dl class="grid grid-cols-4 space-y-1">
         <dt class="font-bold">Name:</dt>
-        <dd class="col-span-3">{{$item->name}}</dd>
+        <dd class="col-span-3">{{$user->name}}</dd>
         <dt class="font-bold">E-mailadres:</dt>
-        <dd class="col-span-3">{{$item->email}}</dd>
+        <dd class="col-span-3">{{$user->email}}</dd>
         <dt class="font-bold">Rol:</dt>
         <dd class="col-span-3">
-            @switch($item->role)
+            @switch($user->role)
                 @case('user')Gebruiker @break
                 @case('admin')Admin @break
             @endswitch
         </dd>
         <dt class="font-bold">Authenticatie:</dt>
         <dd class="col-span-3">
-            @if($item->password)
-                {{$item->name ?? 'Gebruiker'}} kan inloggen
+            @if($user->password)
+                {{$user->name ?? 'Gebruiker'}} kan inloggen
             @else
-                {{$item->name ?? 'Gebruiker'}} kan <b>niet</b> inloggen
+                {{$user->name ?? 'Gebruiker'}} kan <b>niet</b> inloggen
             @endif
         </dd>
     </dl>
 
     <h3 class="mt-8 text-xl font-semibold">Veto's</h3>
-    @if($item->vetos->isEmpty())
-        <i>{{$item->name ?? 'Gebruiker'}} heeft geen veto's.</i>
+    @if($user->vetos->isEmpty())
+        <i>{{$user->name ?? 'Gebruiker'}} heeft geen veto's.</i>
     @else
         <ul class="list-disc list-inside">
-            @foreach($item->vetos as $veto)
+            @foreach($user->vetos as $veto)
                 <li>{{$veto->name}}</li>
             @endforeach
         </ul>

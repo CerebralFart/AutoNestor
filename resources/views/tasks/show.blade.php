@@ -1,18 +1,19 @@
 @extends('layout.base')
 
-@section('title', 'Taak \'' . $item->name . '\'')
+@section('title', 'Taak \'' . $task->name . '\'')
 
 @section('buttons')
-    @can('update', $item)
+    @can('update', $task)
         <x-button
-            href="{{route('tasks.update', ['id' => $item->id])}}"
+            href="{{route('tasks.edit', ['task' => $task])}}"
             icon="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
         >
             Bewerken
         </x-button>
     @endif
-    @can('delete', $item)
-        <form method="POST" action="{{route('tasks.delete', ['id' => $item->id])}}" class="m-0">
+    @can('delete', $task)
+        <form method="POST" action="{{route('tasks.destroy', ['task' => $task])}}" class="m-0">
+            @method('DELETE')
             @csrf
             <x-button
                 color="red"
@@ -28,17 +29,17 @@
 @section('content')
     <dl class="grid grid-cols-4 space-y-1">
         <dt class="font-bold">Taak:</dt>
-        <dd class="col-span-3">{{$item->name}}</dd>
+        <dd class="col-span-3">{{$task->name}}</dd>
         <dt class="font-bold">Omschrijving:</dt>
-        <dd class="col-span-3">{{$item->description}}</dd>
+        <dd class="col-span-3">{{$task->description}}</dd>
     </dl>
 
     <h3 class="mt-8 text-xl font-semibold">Veto's</h3>
-    @if($item->vetoers->isEmpty())
-        <i>{{$item->name ?? 'Taak'}} heeft geen veto's.</i>
+    @if($task->vetoers->isEmpty())
+        <i>{{$task->name ?? 'Taak'}} heeft geen veto's.</i>
     @else
         <ul class="list-disc list-inside">
-            @foreach($item->vetoers as $veto)
+            @foreach($task->vetoers as $veto)
                 <li>{{$veto->name}}</li>
             @endforeach
         </ul>

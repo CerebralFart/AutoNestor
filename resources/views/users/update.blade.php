@@ -1,10 +1,11 @@
 @extends('layout.base')
 
-@section('title', 'Gebruiker \'' . $item->name . '\' bewerken')
+@section('title', 'Gebruiker \'' . $user->name . '\' bewerken')
 
 @section('buttons')
-    @can('delete', $item)
-        <form method="POST" action="{{route('users.delete', ['id' => $item->id])}}" class="m-0">
+    @can('delete', $user)
+        <form method="POST" action="{{route('users.destroy', ['user' => $user->id])}}" class="m-0">
+            @method('DELETE')
             @csrf
             <x-button
                 color="red"
@@ -18,27 +19,28 @@
 @endsection
 
 @section('content')
-    <form class="flex flex-col gap-2 mt-4" method="POST">
+    <form class="flex flex-col gap-2 mt-4" method="POST" action="{{route('users.update', ['user' => $user])}}">
+        @method('PUT')
         <x-form.text
             id="name"
             name="Naam"
-            value="{{$item->name}}"
+            value="{{$user->name}}"
         />
         <x-form.text
             id="email"
             name="E-mailadres"
-            value="{{$item->email}}"
+            value="{{$user->email}}"
         />
         <x-form.select
             id="role"
             name="Rol"
-            :value="$item->role"
+            :value="$user->role"
             :options="['admin' => 'Administrator', 'user' => 'Gebruiker']"
         />
         <x-form.multi-select
             id="vetos"
             name="Veto's"
-            :values="$item->vetos->pluck('id')->all()"
+            :values="$user->vetos->pluck('id')->all()"
             :options="collect(\App\Models\Task::all())->pluck('name','id')->all()"
         />
         @csrf

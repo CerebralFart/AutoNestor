@@ -45,7 +45,7 @@
                     <div class="px-4 py-4 sm:px-6 flex flex-row">
                         <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                             <div class="truncate">
-                                <a href="{{route('users.show', ['id' => $item->id])}}" class="block flex gap-2">
+                                <a href="{{route('users.show', ['user' => $item->id])}}" class="block flex gap-2">
                                     <p class="font-medium text-blue-600 truncate">{{$item->name}}</p>
                                     <p class="flex-shrink-0 font-normal text-gray-500">
                                         {{$item->email}}
@@ -68,14 +68,15 @@
                         </div>
                         <div class="flex-grow flex flex-row gap-2 justify-end items-center">
                             @can('update', $item)
-                                <a href="{{route('users.update', ['id' => $item->id])}}">
+                                <a href="{{route('users.update', ['user' => $item->id])}}">
                                     <svg class="h-5 w-5 text-gray-400 hover:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
                                 </a>
                             @endcan
-                            @can('delete',$item)
-                                <form method="POST" action="{{route('users.delete', ['id' => $item->id])}}" class="m-0">
+                            @can('delete', $item)
+                                <form method="POST" action="{{route('users.destroy', ['user' => $item->id])}}" class="m-0">
+                                    @method('DELETE')
                                     @csrf
                                     <button type="submit" class="h-5">
                                         <svg class="h-5 w-5 text-gray-400 hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

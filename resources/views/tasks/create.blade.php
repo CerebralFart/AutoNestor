@@ -3,7 +3,7 @@
 @section('title', 'Taak aanmaken')
 
 @section('content')
-    <form class="flex flex-col gap-2 mt-4" method="POST">
+    <form class="flex flex-col gap-2 mt-4" method="POST" action="{{route('tasks.store')}}">
         <x-form.text
             id="name"
             name="Naam"
@@ -15,7 +15,7 @@
         <x-form.multi-select
             id="vetoers"
             name="Veto's"
-            :values="$item->vetoers->pluck('id')->all()"
+            :values="$task->vetoers->pluck('id')->all()"
             :options="collect(\App\Models\User::all())->pluck('name','id')->all()"
         />
         @csrf
